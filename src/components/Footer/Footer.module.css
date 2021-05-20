@@ -1,0 +1,10 @@
+.root {
+  padding: calc(var(--yr) * 2);
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-secondary);
+
+  & .company {
+    white-space: nowrap;
+  }
+}

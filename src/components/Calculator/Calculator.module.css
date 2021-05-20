@@ -1,0 +1,21 @@
+.root {
+  /* border-radius: var(--yr);
+  box-shadow: 0 var(--yr) calc(var(--yr) * 2) rgba(0, 0, 0, 0.12);
+  padding: calc(var(--yr) * 3); */
+
+  & .result {
+    font-size: 3rem;
+    text-align: right;
+    padding: var(--yr) 0;
+  }
+
+  & .numpad {
+    display: grid;
+    gap: var(--yr);
+    grid-template-columns: repeat(4, 1fr);
+
+    & .double {
+      grid-column: span 2;
+    }
+  }
+}

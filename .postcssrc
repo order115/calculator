@@ -1,0 +1,15 @@
+{
+  "modules": true,
+  "plugins": {
+    "autoprefixer": {},
+    "postcss-modules": {
+      "generateScopedName": "[name]_[local]__[hash:base64:5]",
+      "hashPrefix": "prefix"
+    },
+    "postcss-preset-env": {
+      "features": {
+        "nesting-rules": "true"
+      }
+    }
+  }
+}

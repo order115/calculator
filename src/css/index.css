@@ -1,0 +1,31 @@
+:root {
+  --fz: 16px;
+  --ff-global: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --lh-global: 1.5;
+  --yr: 0.5rem;
+  --bg: #ffffff;
+  --text-primary: #212121;
+  --text-secondary: #767676;
+  --border-color: #eee;
+  --primary: #ffcf00;
+}
+
+html {
+  font-size: var(--fz);
+  line-height: var(--lh-global);
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--ff-global);
+  background: var(--bg);
+  color: var(--text-primary);
+}
