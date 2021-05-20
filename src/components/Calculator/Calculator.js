@@ -2,24 +2,17 @@ import React, { useState, useEffect } from "react";
 import styles from "./Calculator.module.css";
 import Button from "../Button/Button";
 
-const inititalStates = {
-  result: "0",
-  store: "0",
-  value: "0",
-  operation: "",
-};
-
 const Calculator = () => {
-  const [result, setResult] = useState(inititalStates.result);
-  const [store, setStore] = useState(inititalStates.store);
-  const [value, setValue] = useState(inititalStates.value);
-  const [operation, setOperation] = useState(inititalStates.operation);
+  const [display, setDisplay] = useState("0");
+  const [store, setStore] = useState("0");
+  const [value, setValue] = useState("0");
+  const [operation, setOperation] = useState();
   const [clearTitle, setClearTitle] = useState("AC");
 
   useEffect(() => {
     console.log(
-      "Result:",
-      result,
+      "Display:",
+      display,
       "Store:",
       store,
       "Value:",
@@ -27,40 +20,52 @@ const Calculator = () => {
       "Operation:",
       operation
     );
-  }, [result, store, , operation]);
+  }, [display, store, , operation]);
+
+  const math = (x, oper, y) => {
+    return eval(myArray.join(" "));
+  };
 
   const clearStates = () => {
-    if (+value) {
-      setValue(inititalStates.value);
-      setResult(inititalStates.result);
-    } else {
-      setValue(store);
-      setResult(store);
-      setStore(inititalStates.store);
-    }
-    setClearTitle("AC");
+    setDisplay("0");
+    setValue("0");
+    setStore("0");
   };
 
   const handleNumButton = (num) => {
-    const newValue = String(
-      +result === 0 ? (+num === 0 ? 0 : num) : result + num
-    );
+    const enterValue = (value + num).replace(/^0+/, "");
 
-    setResult(+store ? "0" : newValue);
-    setValue(+store ? "0" : newValue);
-    setClearTitle("C");
+    if (+enterValue) {
+      setDisplay(enterValue);
+      setValue(enterValue);
+    }
+
+    // const newValue = String(
+    //   +value === 0 ? (+num === 0 ? 0 : num) : value + num
+    // );
+    // if (!+value) {
+    //   setValue(newValue);
+    //   setDisplay(newValue);
+    // }
+    // // setDisplay(newValue);
+    // // setValue(newValue);
+    // setClearTitle("C");
   };
 
   const handleOperationButton = (operation) => {
     setOperation(operation);
-    if (+value) setStore(value);
-    setValue(inititalStates.value);
-    setResult(inititalStates.result);
+    if (+store && +value) {
+      setStore(eval(store + operation + value));
+      setDisplay(eval(store + operation + value));
+    } else {
+      setStore(value);
+      setDisplay(value);
+    }
   };
 
   return (
     <div className={styles.root}>
-      <div className={styles.result}>{result}</div>
+      <div className={styles.display}>{display}</div>
       <div className={styles.numpad}>
         <Button
           color="secondary"
@@ -79,32 +84,32 @@ const Calculator = () => {
         <Button color="primary" onClick={() => handleOperationButton("/")}>
           /
         </Button>
-        <Button onClick={() => handleNumButton(6)}>6</Button>
-        <Button onClick={() => handleNumButton(8)}>8</Button>
-        <Button onClick={() => handleNumButton(9)}>9</Button>
+        <Button onClick={() => handleNumButton("6")}>6</Button>
+        <Button onClick={() => handleNumButton("8")}>8</Button>
+        <Button onClick={() => handleNumButton("9")}>9</Button>
         <Button color="primary" onClick={() => handleOperationButton("*")}>
           *
         </Button>
-        <Button onClick={() => handleNumButton(4)}>4</Button>
-        <Button onClick={() => handleNumButton(5)}>5</Button>
-        <Button onClick={() => handleNumButton(6)}>6</Button>
+        <Button onClick={() => handleNumButton("4")}>4</Button>
+        <Button onClick={() => handleNumButton("5")}>5</Button>
+        <Button onClick={() => handleNumButton("6")}>6</Button>
         <Button color="primary" onClick={() => handleOperationButton("-")}>
           -
         </Button>
-        <Button onClick={() => handleNumButton(1)}>1</Button>
-        <Button onClick={() => handleNumButton(2)}>2</Button>
-        <Button onClick={() => handleNumButton(3)}>3</Button>
+        <Button onClick={() => handleNumButton("1")}>1</Button>
+        <Button onClick={() => handleNumButton("2")}>2</Button>
+        <Button onClick={() => handleNumButton("3")}>3</Button>
         <Button color="primary" onClick={() => handleOperationButton("+")}>
           +
         </Button>
         <Button
           size="double"
-          onClick={() => handleNumButton(0)}
+          onClick={() => handleNumButton("0")}
           className={styles.double}
         >
           0
         </Button>
-        <Button onClick={() => handleNumButton(",")}>,</Button>
+        <Button onClick={() => handleNumButton(".")}>.</Button>
         <Button color="primary" onClick={() => handleOperationButton("=")}>
           =
         </Button>
