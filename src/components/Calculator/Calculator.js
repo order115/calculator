@@ -20,7 +20,7 @@ const Calculator = () => {
   };
 
   const handleEnter = (enter) => {
-    const newValue = (value + enter).replace(/^0+/, "");
+    const newValue = ((+store ? "0" : value) + enter).replace(/^0+/, "");
     setValue(newValue);
     setDisplay(newValue);
   };
